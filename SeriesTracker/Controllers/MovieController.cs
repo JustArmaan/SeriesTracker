@@ -6,19 +6,16 @@ namespace SeriesTracker.Controllers
 {
     public class MovieController : Controller
     {
-        public IActionResult Index()
+                private readonly IMovieRepository _movieRepository;
+                  public MovieController(IMovieRepository movieRepository)
         {
-            List<Movie> movies = GetMovies();
-            return View(movies);
+            _movieRepository = movieRepository;
         }
 
-        private List<Movie> GetMovies()
+        public IActionResult Index()
         {
-            return new List<Movie>
-            {
-                new Movie { Id = 1, Title = "Movie 1", Genre = "Action", Director = "Director 1", Year = 2021 },
-                new Movie { Id = 2, Title = "Movie 2", Genre = "Comedy", Director = "Director 2", Year = 2022 }
-            };
+            var movies = _movieRepository.GetMovies();
+            return View(movies);
         }
     }
 }

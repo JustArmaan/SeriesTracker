@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SeriesTracker.Data;
+using SeriesTracker.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<IMovieRepository, MockRepository>();
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
